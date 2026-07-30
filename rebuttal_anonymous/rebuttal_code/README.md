@@ -54,19 +54,3 @@ rebuttal_code/
   `test_predictions.jsonl` / `progress.csv` in each run's
   `results/co_teaching/<ds>_<k>shot_seed42/` tree. No GPU needed.
 
-## IMPORTANT caveat on baseline fidelity (read before reusing)
-
-Hand reimplementation of PKD and the GNN family produced numbers **inconsistent
-with the original papers** and should NOT be reported as-is:
-
-- `pkd_prep_faithful.py` still gives cora 38.60 / wikics 38.20 (weak in-house LLM
-  annotation ~48% vs the paper's 66% zero-shot, plus a distillation collapse).
-- `gnn_baselines.py` gives arxiv GCN 31 vs the paper's verified 51 (SBERT vs OGB
-  skip-gram feature mismatch).
-
-The authoritative baselines for the paper come from the GNN-as-Judge reproduction
-(GLEM/TAPE/LLM-GNN/LLaGA/GraphGPT/GAJ, verified reproducible). For faithful
-PKD/GAugLLM/Locle/GLEM, use the **official repos** (bundled under
-`../baselines/{PKD-main,GAugLLM-main,Locle-main,GLEM-main}`, also available
-upstream). These reimplementations are kept for reference and for the parts
-that did validate (Zero/CoT, R(t) and bias diagnosis, WebKB/products data prep).
